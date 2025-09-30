@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Iruthya | AI & Data Science Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="icon" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#certifications" class="nav-link">Certifications</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+    <canvas id="constellation-canvas"></canvas>
+
+    <div class="portfolio-content">
+
+        <header class="hero">
+            <h1>Hi, I’m Angel Iruthya F </h1>
+            <p class="sub-title">Data Science and AI Student</p>
+            <p class="tagline">"Turning code into creativity — I'm an aspiring engineer blending data, design, and innovation to shape a smarter tomorrow."</p>
+            <div class="cta-group">
+                <a href="Angel Iruthya F.pdf" class="cta-button" target="_blank">
+                    <i class="fa-solid fa-file-lines"></i>Resume
+                </a>
+                <a href="#contact" class="cta-button">
+                    <i class="fa-solid fa-envelope"></i>Contact Me
+                </a>
+                <a href="http://www.linkedin.com/in/angel-iruthya-f" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </header>
+
+        <section id="about" class="section">
+            <div class="section-heading-wrapper">
+                <h2>About Me</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="about-content-wrapper">
+                
+                <div class="profile-photo">
+                    <img src="profile.jpg" onerror="this.src='https://placehold.co/200x200/00bcd4/050505?text=A.I.'" alt="Angel Iruthya Profile Photo"> 
+                </div>
+                
+                <div class="about-text">
+                    <p>
+                        Hello! I'm Angel Iruthya F, a passionate engineering student specializing in Data Science with Artificial Intelligence. I love transforming raw data into smart, intuitive solutions that make a real impact.
+                    </p>
+                    <p>
+                        With a solid foundation in Python, Machine Learning, and Frontend Development, I enjoy building applications that seamlessly combine functionality, design, and data insights. Whether it’s creating a user-friendly interface or training a predictive model, I thrive on solving meaningful challenges through code.
+                    </p>
+                    <p>
+                        Driven by curiosity, creativity, and the desire to innovate, I am constantly exploring how technology can shape a better, smarter future.
+                    </p>
+                </div>
+                
+            </div>
+        </section>
+        
+        <section id="skills" class="section">
+            <div class="section-heading-wrapper">
+                <h2>Technical Skills</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div id="skills-grid-container">
+
+                <div class="skill-group-card">
+                    <h3><i class="fas fa-laptop-code"></i> Programming & Web Dev</h3>
+                    <div class="skill-tags-grid">
+                        <div class="skill-bubble" data-delay="0">Python</div>
+                        <div class="skill-bubble" data-delay="100">HTML, CSS</div>
+                        <div class="skill-bubble" data-delay="200">JavaScript</div>
+                        <div class="skill-bubble" data-delay="300">Flask (Backend Framework)</div>
+                    </div>
+                </div>
+
+                <div class="skill-group-card">
+                    <h3><i class="fas fa-chart-line"></i> Data Analysis & BI</h3>
+                    <div class="skill-tags-grid">
+                        <div class="skill-bubble" data-delay="400">Data Analytics</div>
+                        <div class="skill-bubble" data-delay="500">Business Intelligence (BI)</div>
+                        <div class="skill-bubble" data-delay="600">MySQL (Basics)</div>
+                        <div class="skill-bubble" data-delay="700">Pandas & NumPy (Data Manipulation)</div>
+                        <div class="skill-bubble" data-delay="800">Matplotlib & Seaborn (Data Visualization)</div>
+                    </div>
+                </div>
+
+                <div class="skill-group-card">
+                    <h3><i class="fas fa-robot"></i> AI & Deep Learning</h3>
+                    <div class="skill-tags-grid">
+                        <div class="skill-bubble" data-delay="900">Scikit-learn (ML Models)</div>
+                        <div class="skill-bubble" data-delay="1000">TensorFlow / PyTorch (Basics)</div>
+                        <div class="skill-bubble" data-delay="1100">Natural Language Processing (NLP basics)</div>
+                        <div class="skill-bubble" data-delay="1200">Computer Vision (OpenCV basics)</div>
+                    </div>
+                </div>
+
+                <div class="skill-group-card">
+                    <h3><i class="fas fa-tools"></i> ML Tools & Platforms</h3>
+                    <div class="skill-tags-grid">
+                        <div class="skill-bubble" data-delay="1300">Jupyter Notebook / Google Colab</div>
+                        <div class="skill-bubble" data-delay="1400">Streamlit (ML App Prototyping)</div>
+                        <div class="skill-bubble" data-delay="1500">Git / GitHub</div>
+                        <div class="skill-bubble" data-delay="1600">IBM Cloud / Azure</div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <section id="certifications" class="section">
+            <div class="section-heading-wrapper">
+                <h2>Certifications</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div id="certifications-grid-container" class="card-container">
+                
+                <div class="certification-card info-card">
+                    <p class="cert-title">Python for Data Science</p>
+                    <p class="cert-issuer">NPTEL</p>
+                </div>
+
+                <div class="certification-card info-card">
+                    <p class="cert-title">Introduction to Python</p>
+                    <p class="cert-issuer">IBM</p>
+                </div>
+                
+                <div class="certification-card info-card">
+                    <p class="cert-title">Business Intelligence</p>
+                    <p class="cert-issuer">IBM</p>
+                </div>
+
+                <div class="certification-card info-card">
+                    <p class="cert-title">Cloud Application Developer</p>
+                    <p class="cert-issuer">IBM</p>
+                </div>
+                
+                <div class="certification-card info-card">
+                    <p class="cert-title">Microsoft Identity and Access Administrator Training</p>
+                    <p class="cert-issuer">Microsoft</p>
+                </div>
+
+                <div class="certification-card info-card">
+                    <p class="cert-title">Microsoft Operation Analyst Training</p>
+                    <p class="cert-issuer">Microsoft</p>
+                </div>
+                
+                <div class="certification-card info-card">
+                    <p class="cert-title">AWS Academy Cloud Architecting</p>
+                    <p class="cert-issuer">AWS Academy</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="section-heading-wrapper">
+                <h2>Projects</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="carousel-container">
+                <button class="carousel-button prev-button" aria-label="Previous Project"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="project-grid" id="project-carousel-track">
+                    
+                    <div class="project-card" data-project-id="compound-screening">
+                        <div class="project-card-image-container">
+                            <img src="1.webp" onerror="this.src='https://placehold.co/400x210/00bcd4/050505?text=Compound+Screening'" alt="AI molecular structure visualization" class="project-card-image">
+                        </div>
+                        <div class="card-body">
+                            <h3>AI-Powered Natural Compound Screening</h3>
+                            <div class="card-footer">
+                                <span class="view-link">View Project Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-project-id="plastic-cycle">
+                        <div class="project-card-image-container">
+                            <img src="2.jpg" onerror="this.src='https://placehold.co/400x210/3e7bff/050505?text=PlastiCycle+App'" alt="Recycling illustration" class="project-card-image">
+                        </div>
+                        <div class="card-body">
+                            <h3>PlastiCycle</h3>
+                            <div class="card-footer">
+                                <span class="view-link">View Project Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-project-id="job-analyzer">
+                        <div class="project-card-image-container">
+                            <img src="3.webp" onerror="this.src='https://placehold.co/400x210/00bcd4/050505?text=Job+Analyzer+AI'" alt="Job analysis chart and AI icon" class="project-card-image">
+                        </div>
+                        <div class="card-body">
+                            <h3>AI-powered Job Analyzer & Career System</h3>
+                            <div class="card-footer">
+                                <span class="view-link">View Project Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-project-id="screen-time">
+                        <div class="project-card-image-container">
+                            <img src="4.jpg" onerror="this.src='https://placehold.co/400x210/3e7bff/050505?text=Screen+Time+Manager'" alt="Time management interface graphic" class="project-card-image">
+                        </div>
+                        <div class="card-body">
+                            <h3>Screen Time Manager</h3>
+                            <div class="card-footer">
+                                <span class="view-link">View Project Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <button class="carousel-button next-button" aria-label="Next Project"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section id="events" class="section">
+            <div class="section-heading-wrapper">
+                <h2>Hackathons and Conferences</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="experience-item">
+                <h3><i class="fas fa-trophy"></i> AI-powered Job Analyzer & Career System</h3>
+                <p><strong>Event:</strong> IBM Hackathon’25</p>
+                <ul>
+                    <li>Built an **AI-driven platform** for resume screening and job–resume matching using BERT, NLP/NER, AI/ML models.</li>
+                    <li>Provided **personalized career counseling** based on skill gap analysis and generated learning paths to support employability.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3><i class="fas fa-flask"></i> PlastiCycle</h3>
+                <p><strong>Event:</strong> HackXelerate’25</p>
+                <ul>
+                    <li>Developed an **AI-powered recycling platform** utilizing mobile image recognition to instantly identify plastic types.</li>
+                    <li>Solution promotes eco-friendly disposal methods and includes a reward system, directly addressing **UN SDG 12 & 13**.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3><i class="fas fa-user-check"></i> Screen Time Manager (PausePlay)</h3>
+                <p><strong>Event:</strong> VIT National Level Hackathon / MGR NCICT’25 (Paper Presentation)</p>
+                <ul>
+                    <li>**Paper Presentation (MGR NCICT’25):** Presented research on the "PausePlay Smart Screen Time Manager" system.</li>
+                    <li>Developed a browser extension for **robust parental control** focused on healthy digital habits for children, featuring custom time profiles and interactive quizzes.</li>
+                    </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3><i class="fas fa-microscope"></i> AI for Ocean Sustainability</h3>
+                <p><strong>Event:</strong> ARCH INTERNATIONAL CONFERENCE - MODI’25 (Paper Presentation)</p>
+                <ul>
+                    <li>Presented a research paper proposing an **AI-driven solution** for monitoring and analyzing ocean health data.</li>
+                    <li>Focus areas included using ML models for predicting pollution trends and identifying endangered marine life habitats.</li>
+                </ul>
+            </div>
+            
+        </section>
+        
+        <section id="experience" class="section">
+            <div class="section-heading-wrapper">
+                <h2>Professional Experience</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="job-item">
+                <h3><i class="fas fa-code-branch"></i> Full-Stack Web Development Intern</h3>
+                <p>8 Queens Software Technologies</p>
+                <span class="period">Aug 2024 – Sep 2024</span>
+                <ul>
+                    <li>Contributed to the development of several **responsive front-end interfaces** using advanced HTML, CSS (Flexbox, Grid), and JavaScript, optimizing for performance across various devices.</li>
+                    <li>Implemented **interactive features** and smooth **CSS animations** to improve overall user engagement and visual appeal of client projects.</li>
+                    <li>Gained hands-on experience in **version control (Git)** and collaborative development workflows in an agile environment.</li>
+                </ul>
+            </div>
+            
+        </section>
+
+        <section id="contact" class="section">
+            <div class="section-heading-wrapper">
+                <h2>Get In Touch</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="contact-container">
+                
+                <form id="contact-form" class="contact-form-card">
+                    <input type="text" id="from_name" name="from_name" placeholder="Your Name" required>
+                    <input type="email" id="from_email" name="from_email" placeholder="Your Email" required>
+                    <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+
+                    <button type="submit" id="submit-btn" class="submit-btn">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                    
+                    <div id="form-message" class="form-message"></div>
+                </form>
+
+                <div class="contact-info-static">
+                    <h3>My Contact Details</h3>
+                    
+                    <div class="contact-details-grid">
+                        <p><i class="fas fa-map-marker-alt" style="color: var(--primary-color); margin-right: 8px;"></i> Chennai, Tamil Nadu, India</p>
+                        <p><i class="fas fa-phone" style="color: var(--primary-color); margin-right: 8px;"></i> +91 7200809168</p>
+                        <p><i class="fas fa-envelope" style="color: var(--primary-color); margin-right: 8px;"></i> fangiru2004@gmail.com</p>
+                    </div>
+
+                    <div class="contact-actions-wrapper"> 
+                        <div class="cta-group">
+                            <a href="http://www.linkedin.com/in/angel-iruthya-f" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                        
+                        <a href="Angel Iruthya F.pdf" class="cta-button" target="_blank">
+                            <i class="fa-solid fa-download"></i> Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Angel Iruthya. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn"><i class="fas fa-times"></i></button>
+            <h2 id="modal-title">Project Title</h2>
+            <div id="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

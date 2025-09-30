@@ -1,0 +1,947 @@
+:root {
+    --primary-color: #00bcd4; /* Vibrant Cyan */
+    --secondary-color: #3e7bff; /* Blue for secondary actions */
+    --text-color: #f0f0f0;
+    --background-color: #050505; /* Deep, dark black */
+    --card-bg-color: rgba(255, 255, 255, 0.04);
+    --dark-blue-accent: rgba(62, 123, 255, 0.08); /* NEW: Subtle dark blue */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --timeline-center: 150px; 
+}
+
+/* Keyframes for floating constellation shape (retained) */
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33% { transform: translate(-10px, 15px) rotate(3deg) scale(1.02); }
+    66% { transform: translate(10px, -15px) rotate(-3deg) scale(0.98); }
+}
+
+/* Keyframes for the Abstract Background Shape */
+@keyframes abstractFloat {
+    0% { 
+        transform: translate(0, 0) rotate(0deg); 
+        border-radius: 60% 40% 40% 70% / 70% 60% 70% 30%; 
+    }
+    50% { 
+        transform: translate(-15px, 10px) rotate(5deg); 
+        border-radius: 40% 60% 70% 30% / 30% 70% 60% 40%;
+    }
+    100% { 
+        transform: translate(0, 0) rotate(0deg); 
+        border-radius: 60% 40% 40% 70% / 70% 60% 70% 30%; 
+    }
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden; 
+    line-height: 1.6;
+    padding-top: 70px; /* Space for fixed navbar */
+}
+
+/* -------------------------------------- */
+/* NAVIGATION BAR STYLES */
+/* -------------------------------------- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(5, 5, 5, 0.95); /* Semi-transparent background */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    overflow-x: auto; /* Enable horizontal scrolling for many links */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+.nav-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Webkit browsers */
+}
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.3s, background-color 0.3s;
+    white-space: nowrap;
+}
+.nav-link:hover {
+    color: var(--primary-color);
+    background-color: rgba(0, 188, 212, 0.1);
+    border-radius: 4px;
+}
+
+/* -------------------------------------- */
+/* Constellation Canvas Styling */
+/* -------------------------------------- */
+
+#constellation-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; 
+}
+
+/* -------------------------------------- */
+/* Portfolio Content Styling */
+/* -------------------------------------- */
+
+.portfolio-content {
+    position: relative; 
+    z-index: 1; 
+    padding: 0 5%;
+}
+
+.section {
+    max-width: 1100px;
+    margin: 100px auto;
+    padding: 50px 0;
+}
+
+/* MODIFICATION: Added text-shadow to h2 for glow effect */
+h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-color);
+    text-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+}
+
+/* New Style: Accent Line container for all sections */
+.section-heading-wrapper { /* Renamed from .about-heading-wrapper for global use */
+    text-align: center;
+    margin-bottom: 50px; /* Use this margin instead of h2 margin */
+    padding-bottom: 0px; 
+}
+.section-heading-wrapper h2 {
+    margin-bottom: 10px; /* Space below title for accent line */
+}
+/* RE-ADDED .accent-line CSS */
+.accent-line {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    margin: 0 auto;
+    border-radius: 1.5px;
+}
+
+/* Overriding default h2 margin for consistency across all sections */
+.section h2 { 
+    margin-bottom: 0; 
+}
+
+/* --- ABOUT SECTION STYLES --- */
+/* MODIFICATION: Reverting to Flex layout for 2 columns on large screens */
+.about-content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 900px; /* Use max width to keep image and text closer */
+    margin: 0 auto;
+}
+
+/* MODIFICATION: Profile Photo Styling (INCREASED SIZE) */
+.profile-photo {
+    flex-shrink: 0;
+    width: 250px; /* Increased size */
+    height: 250px; /* Increased size */
+    border-radius: 50%;
+    overflow: visible; /* Important for seeing the border/shadow clearly */
+    
+    /* Clean border frame */
+    border: 4px solid var(--primary-color); 
+    
+    /* Soft glowing shadow */
+    box-shadow: 0 0 25px rgba(0, 188, 212, 0.8); 
+    
+    position: relative; 
+    z-index: 10; 
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    cursor: pointer;
+}
+
+/* Hover effect on the image container */
+.profile-photo:hover {
+    transform: scale(1.05) rotate(1deg); /* Slight scale and rotation */
+    box-shadow: 0 0 35px rgba(0, 188, 212, 1);
+}
+
+/* Floating Abstract Background Shape (ADJUSTED SIZE) */
+.profile-photo::before {
+    content: '';
+    position: absolute;
+    top: -15px; /* Adjust size/position relative to image */
+    left: -15px;
+    width: 280px; /* Adjusted size (250px + 30px offset) */
+    height: 280px; /* Adjusted size */
+    
+    /* Abstract shape with gradient fill */
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    border-radius: 60% 40% 40% 70% / 70% 60% 70% 30%; /* Organic blob shape */
+    opacity: 0.3;
+    z-index: -1;
+    
+    /* Subtle floating animation */
+    animation: abstractFloat 15s ease-in-out infinite alternate;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* MODIFICATION 1: Balanced object-position for head/face visibility */
+    object-position: center top 10%; 
+    border-radius: 50%; /* Ensure image itself is circular */
+    transition: transform 0.4s ease-in-out; 
+}
+/* END OF MODIFICATION */
+
+.about-text {
+    flex-grow: 1;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+    /* REMOVED BOX STYLING */
+    padding: 0; /* Removed padding */
+    border-radius: 0; /* Removed border radius */
+    border: none; /* Removed border */
+    background-color: transparent; /* Removed background color */
+}
+
+/* MODIFICATION: Emphasize bolded text in about section */
+.about-text strong {
+    color: var(--primary-color);
+    text-shadow: 0 0 1px var(--primary-color);
+}
+
+/* Responsive stacking for mobile */
+@media (max-width: 768px) {
+    .about-content-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .profile-photo {
+        /* Re-center image container on mobile */
+        margin: 0 auto;
+    }
+    .about-text {
+        margin-top: 40px; /* Add space between image and text */
+        text-align: left; /* Keep text readable on mobile */
+    }
+}
+/* ---------------------------- */
+
+
+/* -------------------------------------- */
+/* General & CTA Styles (retained) */
+/* -------------------------------------- */
+.hero {
+    min-height: calc(100vh - 70px); /* Account for navbar height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.hero h1 { font-size: 4rem; margin-bottom: 10px; color: var(--text-color); font-weight: 700; }
+/* Adjusted the tagline to be its own line with slightly larger margin */
+.hero .sub-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+.hero .tagline { 
+    font-size: 1.3rem; 
+    max-width: 700px; 
+    margin-bottom: 40px; 
+    font-weight: 300; 
+    color: rgba(255, 255, 255, 0.8); 
+}
+
+.cta-group { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+.cta-button { padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; border: 2px solid transparent; }
+.cta-button:nth-child(1) { background: var(--primary-color); color: var(--background-color); }
+.cta-button:nth-child(1):hover { background: #00e5ff; transform: translateY(-2px); }
+.cta-button:nth-child(2) { background: var(--card-bg-color); color: var(--primary-color); border-color: var(--primary-color); }
+.cta-button:nth-child(2):hover { background: var(--primary-color); color: var(--background-color); transform: translateY(-2px); }
+.social-link { color: var(--text-color); font-size: 1.5rem; transition: color 0.3s; line-height: 2.5rem; }
+.social-link:hover { color: var(--primary-color); }
+
+/* General card container to reuse flex structure */
+/* MODIFICATION 2: Apply dark blue accent to all main cards/items */
+.card-container, #skills-grid-container > div, .certification-card, .job-item, .experience-item {
+    background-color: var(--dark-blue-accent);
+}
+.info-card { 
+    background: var(--dark-blue-accent); /* Applied here */
+    padding: 25px; 
+    border-radius: 8px; 
+    border: 1px solid var(--border-color); 
+    flex-grow: 1; 
+    flex-basis: 300px; 
+    transition: border-color 0.3s, box-shadow 0.3s; 
+}
+.info-card:hover { 
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.5); 
+}
+
+/* Experience Section Specifics (Used for Hackathons/Events) */
+.experience-item {
+    background: var(--dark-blue-accent); /* Applied here */
+    padding: 20px;
+    border-left: 3px solid var(--primary-color);
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 25px;
+    transition: background 0.3s;
+}
+.experience-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+.experience-item h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+.experience-item p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 15px;
+}
+.experience-item ul {
+    padding-left: 20px;
+}
+
+/* --- NEW EXPERIENCE ITEM STYLING (Professional Experience) --- */
+.job-item {
+    background: var(--dark-blue-accent); /* Applied here */
+    padding: 25px;
+    border-left: 3px solid var(--secondary-color);
+    border-radius: 8px;
+    margin-bottom: 25px;
+    transition: background 0.3s, border-color 0.3s;
+}
+.job-item:hover {
+    background: rgba(62, 123, 255, 0.15); /* Slightly darker hover */
+    border-left-color: var(--primary-color);
+}
+.job-item h3 {
+    color: var(--secondary-color);
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+.job-item .period {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-top: 5px;
+    display: block;
+}
+.job-item ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+/* --- END NEW EXPERIENCE ITEM STYLING --- */
+
+
+/* --- DYNAMIC SKILLS SECTION STYLES (2x2 Grid) --- */
+
+#skills-grid-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Default single column for mobile */
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    #skills-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Individual Skill Group Card */
+.skill-group-card {
+    background: var(--dark-blue-accent); /* Applied here */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 25px;
+    height: 100%;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.skill-group-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
+}
+
+/* Category Header */
+.skill-group-card h3 {
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Skill Tag Container */
+.skill-tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Individual Skill Bubble Styling */
+.skill-bubble {
+    background: rgba(0, 188, 212, 0.1);
+    color: var(--primary-color);
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 188, 212, 0.4);
+    font-size: 0.95rem; 
+    font-weight: 500; 
+    cursor: default;
+    
+    /* Animation setup */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0; 
+    transform: translateY(10px);
+}
+
+/* Hover Effects (Glow and Scale) */
+.skill-bubble:hover {
+    background-color: rgba(0, 188, 212, 0.3);
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+    z-index: 2;
+}
+
+/* Fade-in Animation Target */
+.skill-bubble.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- CERTIFICATION SECTION STYLES (REVISED FOR SCROLL BAR) --- */
+
+/* Certifications grid is now the track */
+#certifications-grid-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory;
+    gap: 30px;
+    padding: 20px 0;
+    -webkit-overflow-scrolling: touch;
+    
+    /* Add space for the visible scrollbar */
+    padding-bottom: 30px; 
+    width: 100%;
+}
+
+/* Custom Scrollbar Styling (for Webkit browsers like Chrome/Safari) */
+#certifications-grid-container::-webkit-scrollbar {
+    height: 8px; /* Height of the scrollbar */
+}
+#certifications-grid-container::-webkit-scrollbar-track {
+    background: var(--card-bg-color); /* Background of the scrollbar track */
+    border-radius: 10px;
+}
+#certifications-grid-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color); /* Color of the scroll thumb */
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+#certifications-grid-container::-webkit-scrollbar-thumb:hover {
+    background: #00e5ff; /* Lighter color on hover */
+}
+
+/* Fallback for Firefox */
+#certifications-grid-container {
+    scrollbar-color: var(--primary-color) var(--card-bg-color);
+    scrollbar-width: thin;
+}
+
+.certification-card.info-card {
+    min-width: 250px; 
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    
+    position: relative;
+    border-top: 5px solid var(--secondary-color);
+    border-radius: 0 0 8px 8px;
+    padding-top: 30px;
+    height: 180px; 
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.certification-card.info-card::before {
+    content: '';
+    position: absolute;
+    top: -15px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    border: 3px solid var(--background-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+    z-index: 10;
+}
+
+.cert-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.cert-issuer {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* --- CAROUSEL BUTTON STYLES (PROJECTS ONLY) --- */
+.carousel-container {
+    display: flex;
+    align-items: center;
+    max-width: 1100px; 
+    margin: 0 auto;
+    position: relative;
+}
+
+.carousel-button {
+    background: rgba(0, 188, 212, 0.9);
+    color: var(--background-color);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-button:hover {
+    background: #00e5ff;
+}
+
+.prev-button { margin-right: 15px; }
+.next-button { margin-left: 15px; }
+
+
+/* --- PROJECT/MODAL/MEDIA QUERIES (Existing) --- */
+
+.project-grid {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    gap: 30px;
+    padding: 5px 0 20px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar for cleaner look (Projects still rely on buttons) */
+.project-grid::-webkit-scrollbar { display: none; }
+.project-grid { -ms-overflow-style: none; scrollbar-width: none; }
+
+.project-card {
+    min-width: calc(50% - 15px); 
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    background: var(--dark-blue-accent); /* Applied here */
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 350px; 
+    overflow: hidden; 
+    padding: 0;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 5px 5px 15px rgba(0, 188, 212, 0.3);
+}
+
+/* Image Container */
+.project-card-image-container {
+    height: 60%; 
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+}
+
+/* Image element */
+.project-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    opacity: 0.6; 
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.project-card:hover .project-card-image {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+/* Card Body (Text area) */
+.card-body {
+    height: 40%; 
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3; 
+    height: 2.6em; 
+}
+
+.card-footer { margin-top: auto; }
+
+/* MODIFICATION: Change Project Detail link color to secondary (dark blue) */
+.view-link {
+    display: block;
+    margin-top: 5px;
+    color: var(--secondary-color); /* Changed from primary to secondary */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+
+/* -------------------------------------- */
+/* NEW CONTACT FORM STYLES */
+/* -------------------------------------- */
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: -30px auto 40px auto;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.05rem;
+}
+.contact-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+.contact-form-card {
+    background: var(--dark-blue-accent); /* Applied here */
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form-card input[type="text"],
+.contact-form-card input[type="email"],
+.contact-form-card textarea {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    resize: vertical;
+}
+/* MODIFICATION: Enhanced focus glow */
+.contact-form-card input:focus,
+.contact-form-card textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.8); /* Increased shadow size */
+    outline: none;
+}
+.contact-form-card textarea {
+    min-height: 150px;
+}
+
+.submit-btn {
+    padding: 12px 25px;
+    background: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.submit-btn:hover:not(:disabled) {
+    background: #00e5ff;
+    transform: translateY(-2px);
+}
+.submit-btn:disabled {
+    background: #444;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.form-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.form-message.visible {
+    opacity: 1;
+}
+.form-message.success {
+    background: rgba(0, 255, 127, 0.1);
+    color: #00ff7f;
+    border: 1px solid #00ff7f;
+}
+.form-message.error {
+    background: rgba(255, 69, 0, 0.1);
+    color: orangered;
+    border: 1px solid orangered;
+}
+
+/* MODIFICATION: Use Flexbox for better vertical control in static info */
+.contact-info-static {
+    background: var(--dark-blue-accent); /* Applied here for contact info container */
+    padding: 30px;
+    text-align: center;
+    border-left: 1px solid var(--border-color);
+    border-radius: 10px;
+    
+    /* NEW: Flex container setup */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space out content vertically */
+    align-items: center;
+    height: 100%; /* Important to match form height on desktop */
+}
+.contact-info-static h3 {
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+}
+/* MODIFICATION: Used grid for cleaner contact info alignment */
+.contact-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+    width: 100%; /* Ensure content takes full width */
+}
+.contact-details-grid p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text items left within grid item */
+    text-align: left;
+}
+
+/* NEW: Wrapper for social links and button */
+.contact-actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: auto; /* Push content to bottom in the flex container */
+    padding-top: 20px; /* Separation from details grid */
+}
+
+/* Re-style cta-group to fit within the new structure */
+.contact-actions-wrapper .cta-group {
+    margin: 0; /* Remove existing margins */
+}
+
+/* Style for the resume button to ensure full width */
+.contact-actions-wrapper .cta-button {
+    width: 90%;
+    max-width: 250px;
+    justify-content: center;
+}
+
+
+/* Modal Specific Styles (Retained) */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.modal-content {
+    background-color: var(--background-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 700px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 188, 212, 0.5);
+    animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+.modal-content p, .modal-content li {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+.modal-content ul {
+    padding-left: 25px;
+    margin-top: 10px;
+}
+.modal-close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    transition: color 0.3s;
+}
+.modal-close:hover {
+    color: var(--primary-color);
+}
+.modal-link-group {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+.modal-link-group a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 20px;
+}
+.modal-link-group a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 50px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+/* Media Queries */
+@media (max-width: 1000px) {
+    .project-card {
+        min-width: 320px;
+        height: 300px; 
+    }
+    .project-card-image-container {
+        height: 50%;
+    }
+    .card-body {
+        height: 50%;
+    }
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .contact-info-static {
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        padding-top: 30px;
+        height: auto; /* Allow height to collapse on mobile */
+    }
+    .contact-details-grid p {
+        justify-content: center; /* Center align on mobile */
+    }
+}
+@media (max-width: 768px) {
+    .hero h1 { font-size: 3rem; }
+    .hero .tagline { font-size: 1.1rem; }
+    /* Hide project buttons on mobile */
+    .carousel-button { display: none; } 
+    .modal-content { padding: 20px; }
+    /* Certifications are scrollable by default on mobile */
+    .project-card, .certification-card { min-width: 90%; }
+    .contact-form-card { padding: 20px; }
+}
